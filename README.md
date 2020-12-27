@@ -12,7 +12,7 @@ Manual para hacer deploy del backend (Node js, Sequelize, Express) dockerizado (
 ## Acceso  a AWS Console
 ---
 1. Acceder a [AWS Educate](https://www.awseducate.com/student/s/).
-   ![img0](./Imagenes/Paso1.png)
+   ![img0](./Imagenes/Paso1.PNG)
 2. Iniciar sesión.
 3. Acceder a <span style="color:green" >AWS Account</span>.
    ![img1](./Imagenes/Paso2.png)
@@ -89,7 +89,7 @@ Manual para hacer deploy del backend (Node js, Sequelize, Express) dockerizado (
     
     ![img1](./Imagenes/Paso16.png)
 
-   Y luego damos clic en <span style="color:green"> View Instances</span>.
+      Y luego damos clic en <span style="color:green"> View Instances</span>.
       
       ![img1](./Imagenes/Paso17.png)
 
@@ -115,7 +115,7 @@ Esto depende del tipo de instancia que se haya creado.
    
    Listamos con propiedad para visualizar los permisos del archivo. 
        
-      ![img1](./Imagenes/Paso21.png)
+      ![img1](./Imagenes/Paso21.PNG)
 
 6. Procedemos a cambiar los permisos, para ello ejceutamos. Donde name_file.pem es el nombre que le hayas colocado a tus keys. 
    
@@ -133,11 +133,11 @@ Esto depende del tipo de instancia que se haya creado.
     
       *Ejecución del paso 6, 7 y 8:*
 
-      ![Ejecución de 7 y 8](./Imagenes/Paso22.png) 
+      ![Ejecución de 7 y 8](./Imagenes/Paso22.PNG) 
 
 9.  Y listo, ya estamos conectados a nuestra instancia. 
     
-    ![img1](./Imagenes/Paso23.png)
+    ![img1](./Imagenes/Paso23.PNG)
 
 10. Ahora, les recomiendo ejecutar los demás comandos desde el usuario root, para eso accedemos a el, ejecutando: 
     
@@ -145,7 +145,7 @@ Esto depende del tipo de instancia que se haya creado.
     sudo su
     ```
     
-    ![img1](./Imagenes/Paso24.png)
+    ![img1](./Imagenes/Paso24.PNG)
 
 11. Tammbién les recomiendo hacer un update. En mi caso al ser Debian, se actualiza mendiante:  
     
@@ -230,7 +230,7 @@ ___
    
       *Pasos 3, 4 y 5:*
 
-      ![img1](./Imagenes/Paso28.png)
+      ![img1](./Imagenes/Paso28.PNG)
 
    6. ```bash
       sudo apt-get update
@@ -242,7 +242,7 @@ ___
 
       *Pasos 6 y 7:*
          
-         ![img1](./Imagenes/Paso29_2.png)
+         ![img1](./Imagenes/Paso29_2.PNG)
 
 3. Finalmente comprobamos ejecutando: 
 
@@ -250,7 +250,7 @@ ___
    docker --version
    ```
 
-   ![img1](./Imagenes/Paso30_1.png)
+   ![img1](./Imagenes/Paso30_1.PNG)
 
 4. Ahora, para cualquier distro de Linux, se procede con lo siguiente para instalar *Docker Compose* , que es de acuerdo a la documentación que se puede encontrar [aquí](https://docs.docker.com/compose/install).
 
@@ -282,14 +282,14 @@ La instalación para Debian es tan sencillo como ejecutar:
 apt-get instlal nginx
 ```
 
-![img1](./Imagenes/Paso31_1.png)
+![img1](./Imagenes/Paso31_1.PNG)
 ## Revisión de nginx
 ---
 Hasta este punto, nuestra instancia ya tiene nginx en ejecucción. Esto lo podemos probar accediendo a la *Dirección IPV4 pública*. Esta se encuentra en la información de nuestra instancia. 
 
 En mi caso es *3.95.62.144*, como se observa en la siguiente ilustración:
 
-![img1](./Imagenes/Paso32.png)
+![img1](./Imagenes/Paso32.PNG)
 
 Entonces, si accedo a *http://3.95.62.144*. Ojo, aquí tiene que ser mediante `http` porque todavía no se ha configurado para `https`. 
 
@@ -304,7 +304,7 @@ Accdemos a la carpeta del proyecto y comprobamos que se encuentra nuestros archi
 
 Para este caso es necesario que se tenga el archivo *docker-compose.yml*. 
 
-![img1](./Imagenes/Paso33.png)
+![img1](./Imagenes/Paso33.PNG)
 ## Configuración nginx
 ---
 Primeramente, vamos a borrar la configuración *default* que trae nginx. 
@@ -319,7 +319,7 @@ Y procedemos a crear nuestro archivo de configuración, en mi caso le pondré *n
 nano /etc/nginx/sites-available/nutricion
 ```
 
-![img1](./Imagenes/Paso34.png)
+![img1](./Imagenes/Paso34.PNG)
 
 Y en este archivo, colocamos la configuración de nginx, en mi caso es la siguiente
 
@@ -364,14 +364,14 @@ server {
 3. El `server_name` también puede ser el que gustes. 
 4. El `upstream appname`, donde appname puede ser sustituido por el que gustes. Si se modifica este, también la linea de `http://apname/;`.
    
-![img1](./Imagenes/Paso35.png)
+![img1](./Imagenes/Paso35.PNG)
 
 Ahora, debemos crear un enlace simbolico, hacia la ruta de /etc/nginx/sites-enabled/. En mi caso ejecuto el siguiente comando, donde *nutricion* es el nombre de mi archivo:
 
 ```bash
 ln -s /etc/nginx/sites-available/nutricion /etc/nginx/sites-enabled/nutricion
 ```
-![img1](./Imagenes/Paso36.png)
+![img1](./Imagenes/Paso36.PNG)
 Y listo, la configuración del nginx está completa. Podemos reiniciar el servicio de nginx. 
 
 ```bash
@@ -387,7 +387,7 @@ Ejecutamos la aplicación, mediante:
 docker-compose up -d --build
 ```
 
-![img1](./Imagenes/Paso37.png)
+![img1](./Imagenes/Paso37.PNG)
 
 Esperamos que se construyan las imagenes de docker. Y al terminar esto, verificamos que nuestra aplicación esté correindo, esto ejecutando: 
 
@@ -395,13 +395,13 @@ Esperamos que se construyan las imagenes de docker. Y al terminar esto, verifica
 docker ps
 ```
 
-![img1](./Imagenes/Paso38.png)
+![img1](./Imagenes/Paso38.PNG)
 Luego de esto, reiniciamos el servicio de nginx si es que no lo había hecho o igual lo podemos volver a hacer sin problemas. Para ello ejecutamos:
 
 ```bash
 sytemctl restart nginx
 ```
-![img1](./Imagenes/Paso39_1.png)
+![img1](./Imagenes/Paso39_1.PNG)
 ## Test de Aplicación
 ---
 Ahora, ya está nuestra aplicación en ejecucción. Para eso lo verificamos de forma local con el comando: 
@@ -412,13 +412,13 @@ curl http://localhost:8080
 
 Donde obtengo de salida: 
 
-![img1](./Imagenes/Paso39_2.png)
+![img1](./Imagenes/Paso39_2.PNG)
 
 En mi caso, no tengo ningún endpoint con esa ruta, es por eso que me arroja este mensaje. 
 
 Ahora, probamos desde fuera, accediendo a la dirección pública de nuestra instancia, en mi caso es *http://3.95.62.144*, mediante nuestro navegador. 
 
-![img1](./Imagenes/Paso40.png)
+![img1](./Imagenes/Paso40.PNG)
 
 Y obtenemos el mismo resultado que en local, ahora ya no está el *Welcome to nginx* y ya está nuestra aplicación desplegada. 
 
@@ -428,7 +428,7 @@ Y obtenemos el mismo resultado que en local, ahora ya no está el *Welcome to ng
 Probaré un endpoint que hace una consulta en la base de datos, este es */v1/web/aliments-categories*. 
 El cual es el siguiente: 
 
-![img1](./Imagenes/Paso41.png)
+![img1](./Imagenes/Paso41.PNG)
 
 Notese, que he tenido un error, esto porque la tablas no se han creado todavía, ya que necesito ejecutar unas migraciones al iniciar por primera vez. Si es tu caso, puedes seguir los siguientes pasos.
 ### Ejecución de migraciones.
@@ -445,7 +445,7 @@ Y verificamos, listando para ver los archivos de nuestra aplicación.
 ls
 ```
 
-![img1](./Imagenes/Paso42.png)
+![img1](./Imagenes/Paso42.PNG)
 
 Y ahora, ejecutamos las migraciones, en mi caso, al usar Sequelize, el comando es el siguiente:
 
@@ -453,33 +453,33 @@ Y ahora, ejecutamos las migraciones, en mi caso, al usar Sequelize, el comando e
 sequelize db:migrate --url "postgres://postgres:tucontraseña@db:5432/Nutricion_dev"
 ``` 
 
-![img1](./Imagenes/Paso43.png)
+![img1](./Imagenes/Paso43.PNG)
 
 Para más información sobre las migraciones de Sequelize, visita la documentación [aquí](https://sequelize.org/master/manual/migrations.html).
 
 Y ahora, si vuelvo a probar el endpoint */v1/web/aliments-categories*, en esta ocasión no habrá error, solo retornará un array vacío. 
 
-![img1](./Imagenes/Paso44.png)
+![img1](./Imagenes/Paso44.PNG)
 
 Si hago un `POST` desde *insomnia* para agregar información utilizando ya la dirección pública de la instacia *http://3.95.62.144*, puedo comprobar que esta funciona correctamente. 
 
 Así como se aprecia en la imagen: 
 
-![img1](./Imagenes/Paso45.png)
+![img1](./Imagenes/Paso45.PNG)
 
 Y nuevamente, hago otro:
 
-![img1](./Imagenes/Paso46.png)
+![img1](./Imagenes/Paso46.PNG)
 
 Finalmente, reviso el endpoint */v1/web/aliments-categories*, observaré que ahora si me arroja lo que recientemente agregué. 
 
-![img1](./Imagenes/Paso47.png)
+![img1](./Imagenes/Paso47.PNG)
 
 Finalmente, cierro todas las sesiones
 1. De donde está mi aplicación
 2. Luego de root de la instancia 
 3. Finalmente de la instancia.  
 
-![img1](./Imagenes/Paso48.png)
+![img1](./Imagenes/Paso48.PNG)
 
 Listo, hemos hecho el deploy del backend y la prueba del mismo.
