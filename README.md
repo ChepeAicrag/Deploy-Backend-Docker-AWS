@@ -289,7 +289,7 @@ Hasta este punto, nuestra instancia ya tiene nginx en ejecucción. Esto lo podem
 
 En mi caso es *3.95.62.144*, como se observa en la siguiente ilustración:
 
-![img1](./Imagenes/Paso32.PNG)
+![img1](./Imagenes/Paso32.png)
 
 Entonces, si accedo a *http://3.95.62.144*. Ojo, aquí tiene que ser mediante `http` porque todavía no se ha configurado para `https`. 
 
@@ -412,7 +412,7 @@ curl http://localhost:8080
 
 Donde obtengo de salida: 
 
-![img1](./Imagenes/Paso39_2.PNG)
+![img1](./Imagenes/Paso39_2.png)
 
 En mi caso, no tengo ningún endpoint con esa ruta, es por eso que me arroja este mensaje. 
 
