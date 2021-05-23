@@ -6,8 +6,8 @@ Manual para hacer deploy del backend (Node js, Sequelize, Express) dockerizado (
 
 ## Requisitos
 ---
-* Cuenta de AWS Educate
-* Código en un repositorio de GitHub | GitLab
+* Cuenta de AWS Educate o AWS
+* Código en un repositorio de GitHub o GitLab o cualquier otro hosting de repositorios
 
 ## Acceso  a AWS Console
 ---
@@ -279,7 +279,7 @@ Esto es muy seguro de que no esté preinstalado, así que instalamos directament
 La instalación para Debian es tan sencillo como ejecutar:
 
 ```
-apt-get instlal nginx
+apt-get install nginx
 ```
 
 ![img1](./Imagenes/Paso31_1.PNG)
@@ -321,7 +321,7 @@ nano /etc/nginx/sites-available/nutricion
 
 ![img1](./Imagenes/Paso34.PNG)
 
-Y en este archivo, colocamos la configuración de nginx, en mi caso es la siguiente
+Y en este archivo, colocamos la configuración de nginx, en mi caso es la siguiente, recomiendo leer la documentación de nginx para entender esta configuración.
 
 ```nginx
 #Configuración de Nginx
@@ -362,7 +362,7 @@ server {
 1. El puerto donde corre el servidor, en mi caso es 8080.
 2. La dirección donde está los archivos de la aplicación, esto puede ser el *WORKDIR* en tu Dockerfile. 
 3. El `server_name` también puede ser el que gustes. 
-4. El `upstream appname`, donde appname puede ser sustituido por el que gustes. Si se modifica este, también la linea de `http://apname/;`.
+4. El `upstream appname`, donde appname puede ser sustituido por el que gustes. Si se modifica este, también la linea de `http://appname/;`.
    
 ![img1](./Imagenes/Paso35.PNG)
 
@@ -379,7 +379,9 @@ systemctl restart nginx
 ```
 ## Ejecucción de la aplicación
 ---
-Ahora, nos situamos dentro de nuestro proyecto, donde tenemos nuestro proyecto recién clonado y donde está el archivo *docker-compose-yml*. 
+Ahora, nos situamos dentro de nuestro proyecto, donde tenemos nuestro proyecto recién clonado y donde está el archivo *docker-compose-yml*.
+
+El archivo [docker-compose](docker-compose.yml) contiene lo necesario para el ejemplo presentado, así mismo está el archivo [Dockerfile](Dockerfile) y [.env](.env) que son empleados en el docker-compose. Puedes observar el contenido de estos archivos y tomarlo para ajustarlo a tus necesiades. 
 
 Ejecutamos la aplicación, mediante: 
 
@@ -433,7 +435,7 @@ El cual es el siguiente:
 Notese, que he tenido un error, esto porque la tablas no se han creado todavía, ya que necesito ejecutar unas migraciones al iniciar por primera vez. Si es tu caso, puedes seguir los siguientes pasos.
 ### Ejecución de migraciones.
 ___
-En este caso, *app¨* es la imagen donde está la aplicación y accedo a ella mediante el usuario root.
+En este caso, *app* es el nombre del contenedor donde está la aplicación y accedo a ella mediante el usuario root.
 
 ```docker
 docker-compose exec -u root app /bin/bash
@@ -455,7 +457,7 @@ sequelize db:migrate --url "postgres://postgres:tucontraseña@db:5432/Nutricion_
 
 ![img1](./Imagenes/Paso43.PNG)
 
-Para más información sobre las migraciones de Sequelize, visita la documentación [aquí](https://sequelize.org/master/manual/migrations.html).
+Para más información sobre las migraciones de Sequelize, visita la documentación [aquí](https://sequelize.org/master/manual/migrations.html). También se pueden ejecutar los seeders desde aquí.
 
 Y ahora, si vuelvo a probar el endpoint */v1/web/aliments-categories*, en esta ocasión no habrá error, solo retornará un array vacío. 
 

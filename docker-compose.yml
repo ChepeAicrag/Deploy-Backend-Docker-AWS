@@ -1,0 +1,49 @@
+version: '3.4'
+ 
+services:
+ 
+ db:
+   image: "postgres:12.4"
+   restart: unless-stopped
+   ports:
+     - ${DB_PORT}:${DB_PORT}
+   environment:
+     POSTGRES_PASSWORD: ${DB_PASSWORD}
+     POSTGRES_USER: ${DB_USERNAME}
+     POSTGRES_DB: ${DB_NAME}
+   volumes:
+     - pgdata:/var/lib/postgresql/data
+ 
+ app:
+   build:
+     context: .
+     dockerfile: Dockerfile
+   ports:
+     - 8080:8080 
+   depends_on:
+     - db
+   volumes:
+     - .:/app/node_app
+     - ./package.json:/app/package.json
+     - ./package-lock.json:/app/package-lock.json
+     - notused:/app/node_modules
+   environment:
+     - TZ=America/Mexico_City
+     - LC_CTYPE=en_US.UTF-8
+     - LC_ALL=en_US.UTF-8
+     - NODE_ENV=${NODE_ENV}
+     - PORT= ${PORT}
+     - DB_PORT=${DB_PORT}
+     - DB_USERNAME=${DB_USERNAME}
+     - DB_PASSWORD=${DB_PASSWORD}
+     - DB_NAME=${DB_NAME}
+     - DB_HOST=${DB_HOST}
+     - DB_DIALECT=${DB_DIALECT}
+     - DB_LOGGING=${DB_LOGGING}
+     - SEED_V=${SEED_V}
+     - CADUCIDAD_TOKEN=${CADUCIDAD_TOKEN}
+     - HOST_AWS=${HOST_AWS}
+volumes:
+ .:    
+ pgdata:
+ notused:
